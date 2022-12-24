@@ -1,0 +1,42 @@
+# This configuration is intended for development purpose, it's **your** responsibility to harden it for production
+version: '3.8'
+services:
+
+  db:
+    image: postgres:14.2
+    platform: linux/amd64
+    # volumes:
+    #   - ~/volumes/jhipster/baseapi/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=keycloak
+      - POSTGRES_USER=keycloak
+      - POSTGRES_PASSWORD=keycloak
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    # If you want to expose these ports outside your dev PC,
+    # remove the "127.0.0.1:" prefix
+    ports:
+      - 127.0.0.1:5432:5432
+
+  auth:
+    image: koolwithk/keycloak-arm:16.0.0
+    #platform: linux/amd64
+    container_name: keycloak
+    environment:
+      - DB_VENDOR=postgres
+      - DB_ADDR=db
+      - DB_DATABASE=keycloak
+      - DB_USER=keycloak
+      - DB_SCHEMA=keycloak
+      - DB_PASSWORD=keycloak
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+    ports:
+        - 127.0.0.1:8081:8080
+    depends_on:
+        - db
+volumes:
+  cache:
+    driver: local
+networks:
+  dockernet:
+    external: true
