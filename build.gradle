@@ -20,13 +20,28 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.keycloak:keycloak-spring-boot-starter:20.0.2'
+    // https://mvnrepository.com/artifact/org.keycloak.bom/keycloak-adapter-bom
+
+
+    // https://mvnrepository.com/artifact/org.keycloak.bom/keycloak-adapter-bom
+
+
+    //implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+
